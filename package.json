@@ -1,0 +1,24 @@
+{
+  "name": "UniShare",
+  "version": "1.0.0",
+  "description": "School social network",
+  "private": "true",
+  "main": "app.js",
+  "scripts": {
+    "build-css": "stylus views/stylesheets/ -o public/css",
+    "watch-css": "stylus source/stylesheets/ -o public/css -w",
+    "clean": "rd /s /q \"public/css\" && md \"public/css\"",
+    "build": "npm run clean && npm run build-css",
+    "watch": "nodemon app -e js,jade",
+    "start": "node app"
+  },
+  "author": "SAILLY Nicolas",
+  "license": "",
+  "dependencies": {
+    "express": "^4.13.4",
+    "jade": "^1.11.0",
+    "morgan": "^1.7.0",
+    "nodemon": "^1.9.1",
+    "stylus": "^0.53.0"
+  }
+}

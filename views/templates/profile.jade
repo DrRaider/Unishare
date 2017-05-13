@@ -1,0 +1,184 @@
+doctype
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    link(rel='icon', href='../../favicon.ico')
+    link(href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet")
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css')
+    // link(rel="stylesheet",href="css/bootstrap.min.css")
+    // Custom styles for this template
+    link(href='/css/profile-header.css', rel='stylesheet')
+    link(href='/css/profile.css', rel='stylesheet')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js')
+    // script(src="js/jquery.min.js")
+    // script(src="js/bootstrap.min.js")
+  body(data-spy='scroll', data-target='.scrollspy').user.navigation.is-light.is-en_US
+    include /profile-header
+    main.user-header
+      .header-background
+      .container
+        .row
+          .col-md-6
+            .header-box
+              .header-avatar
+                img(src='/img/blank_profile_picture.png', width='150', height='150')
+              h1
+                span SAILLY Nicolas
+    main.user-navigation
+      .container
+        .row
+          ul.nav.nav-tabs
+            li.active
+              a(data-toggle='tab', href='#home') Overview
+            li
+              a(data-toggle='tab', href='#menu1') Details
+            li
+              a(data-toggle='tab', href='#menu2') Skillset
+        .tab-content
+          #home.tab-pane.fade.in.active
+            .container(style='width:80%;margin:auto;')
+              br
+              form#contact_form.form-horizontal(action='/sign-up', method='POST',data-toggle="validator")
+                .row
+                  .col-md-6
+                    .form-group
+                      label.col-md-12 First Name
+                      .col-md-12.inputGroupContainer
+                        .input-group
+                          span.input-group-addon
+                            i.glyphicon.glyphicon-user
+                          input.form-control(name='username', type='text', value={session.username}, required="required")
+                    .form-group
+                      label.col-md-12 Last Name
+                      .col-md-12.inputGroupContainer
+                        .input-group
+                          span.input-group-addon
+                            i.glyphicon.glyphicon-user
+                          input.form-control(name='last_name', placeholder='Last Name', type='text', required="required")
+                    .form-group
+                      label.col-md-12 Promotion
+                      .col-md-12.selectContainer
+                        .input-group
+                          span.input-group-addon
+                            i.glyphicon.glyphicon-briefcase
+                          input.form-control(name='promotion', placeholder='1936 - 20XX', type='text',  required="required")
+                    .form-group
+                      label.col-md-12 Age
+                      .col-md-12.inputGroupContainer
+                        .input-group
+                          span.input-group-addon
+                            i.glyphicon.glyphicon-time
+                          input.form-control(name='age', placeholder='Age', type='number', required="required")
+                  .col-md-6 
+                    .form-group
+                      label.col-md-12 Nationality
+                      .col-md-12.inputGroupContainer
+                        .input-group
+                          span.input-group-addon
+                            i.glyphicon.glyphicon-globe
+                          input.form-control(name='nationality', placeholder='Nationality', type='text', required="required")
+                    .form-group
+                      label.col-md-12 Profile picture
+                      .col-md-12.inputGroupContainer
+                        .input-group
+                          span.input-group-addon
+                            i.glyphicon.glyphicon-camera
+                          input.form-control(name='file', type='file', id="file", required="required")
+                    .form-group
+                      label.col-md-12 Password
+                      .col-md-12.inputGroupContainer
+                        .input-group
+                          span.input-group-addon
+                            i.glyphicon.glyphicon-lock
+                          input.form-control(name='user_password', placeholder='Password', type='password', data-match="#user_password", required="required")
+                    .form-group
+                      label.col-md-12 Confirm Password
+                      .col-md-12.inputGroupContainer
+                        .input-group
+                          span.input-group-addon
+                            i.glyphicon.glyphicon-lock
+                          input.form-control(name='confirm_password', placeholder='Confirm Password', type='password', data-match="#user_password", required="required")
+                    // Select Basic
+                  .form-group
+                    // Button
+                    label.col-md-12
+                    .col-md-4
+                    .col-md-4
+                      br
+                      input.collapsed(type='submit', value='Submit').btn.btn-md.btn-primary
+          #menu1.tab-pane.fade
+            .container(style='width:80%;margin:auto;')
+              form#hobbies_form.form-horizontal(action='/sign-up', method='POST')
+                .row
+                  .col-md-12
+                    br
+                    br
+                    .form-group
+                      label.col-md-12 Hobbies
+                      .col-md-12.inputGroupContainer
+                        .input-group
+                          span.input-group-addon
+                            i.glyphicon.glyphicon-tag
+                          input#tokenfield.form-control(name='hobbies', placeholder='Hobby, Hobby, ...', type='text', required="required")
+                    // Text input
+                    .form-group
+                      label.col-md-12 Bio
+                      .col-md-12.inputGroupContainer
+                        .input-group
+                          span.input-group-addon
+                            i.glyphicon.glyphicon-align-left
+                          textarea.form-control(name='bio', placeholder="Introduce yourself ! :)",style="resize:none", rows="5", required="required")
+                  .form-group
+                    // Button
+                    label.col-md-12
+                    .col-md-4
+                    .col-md-4
+                      br
+                      input.collapsed(type='submit', value='Submit').btn.btn-md.btn-primary
+          #menu2.tab-pane.fade
+            .container(style='width:80%;margin:auto;')
+              br
+              form#skills_form.form-horizontal(action='/sign-up', method='POST')
+                #items
+                  .form-group
+                    label.col-md-12 Be a tutor ?
+                    .col-md-12.inputGroupContainer
+                      .input-group
+                        label.radio-inline
+                          input(type='radio', name='optradio')
+                          | Yes
+                        label.radio-inline
+                          input(type='radio', name='optradio')
+                          | No
+                  br
+                  .form-group
+                    .col-md-6
+                      .input-group
+                        span.input-group-addon
+                          i.glyphicon.glyphicon-education
+                        input.form-control(name='skills[]', placeholder='UEXXX', type='text', required="required")
+                    .col-md-4
+                      .input-group
+                        span.input-group-addon
+                          i.fa.fa-trophy
+                        input.form-control(name='skills[][]', placeholder='Level (0 to 20)', type='text', required="required")
+                    button#delete.btn.btn-default.delete(style='width=40px;') Delete
+                // Success message
+                .form-group
+                  // Button
+                  label.col-md-12
+                  .col-md-3
+                  .col-md-3
+                    br
+                    a#add.btn.btn-md.btn-primary 
+                      | New Field
+                  .col-md-3
+                    br
+                    input.collapsed(type='submit', value='Submit', data-parent='#accordion', href='#collapseTwo', aria-expanded='true', aria-controls='collapseTwo', id='submit_skills').btn.btn-md.btn-primary
+script.
+    $('#profile').addClass('active');

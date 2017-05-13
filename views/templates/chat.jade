@@ -1,0 +1,21 @@
+script#home-template(type='text/template').
+ .row
+  .col-md-10
+    .panel.panel-default
+      .panel-heading Lobby
+      .panel-body
+        .nano
+          .content
+            #chatList.list-group
+        form
+          input#chatInput.form-control(type='text')
+  .col-md-2
+    .panel.panel-default
+      .panel-heading
+        h3.panel-title
+          | Online Users 
+          span#userCount.badge.pull-right
+      .panel-body
+        .nano
+          .content
+            #userList.list-group

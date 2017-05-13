@@ -1,0 +1,129 @@
+doctype
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    link(rel='icon', href='../../favicon.ico')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css')
+    // link(rel="stylesheet",href="css/bootstrap.min.css")
+    // Custom styles for this template
+    link(href='/css/profile-header.css', rel='stylesheet')
+    link(href='/css/find-tutor.css', rel='stylesheet')
+    link(href='/css/star-rating.css', rel='stylesheet')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js')
+    script(src='/js/star-rating.js')
+    // script(src="js/jquery.min.js")
+    // script(src="js/bootstrap.min.js")
+  body
+    include /profile-header
+    .container.container_search
+      br
+      .well
+        form.form2.form-horizontal(action='', method='')
+          .row
+            .form-group
+              .col-md-5
+                label.col-md-12 Choose an UE
+                .col-md-12.inputGroupContainer
+                  .input-group
+                    span.input-group-addon
+                      i.glyphicon.glyphicon-education
+                    select#sel1.form-control
+                      option UE1
+                      option UE2
+                      option UE3
+                      option UE4
+              .col-md-4
+                label.col-md-12 &nbsp;
+                .col-md-12.inputGroupContainer
+                  .input-group
+                    input(type='submit', value='Search').btn.btn-md.btn-info
+      .well#search_result
+        h4 
+          |Results :
+        table.table.table-striped
+          thead
+            tr
+              th Name
+              th Tutor rating
+              th UE Level
+              th Ask
+          tbody
+            tr
+              td Jacques Dupont
+              td 
+                i.glyphicon.glyphicon-heart
+                i.glyphicon.glyphicon-heart
+                i.glyphicon.glyphicon-heart
+                i.glyphicon.glyphicon-heart
+                i.glyphicon.glyphicon-heart
+              td                
+                i.glyphicon.glyphicon-fire
+                i.glyphicon.glyphicon-fire
+                i.glyphicon.glyphicon-fire
+              td
+                input(type='submit', value='Ask').btn.btn-sm.btn-info
+            tr
+              td Paul Dupont
+              td 
+                i.glyphicon.glyphicon-heart
+                i.glyphicon.glyphicon-heart
+                i.glyphicon.glyphicon-heart
+              td                
+                i.glyphicon.glyphicon-fire
+                i.glyphicon.glyphicon-fire
+                i.glyphicon.glyphicon-fire
+                i.glyphicon.glyphicon-fire
+                i.glyphicon.glyphicon-fire
+              td
+                input(type='submit', value='Ask').btn.btn-sm.btn-info
+            tr
+              td Georges Dupont
+              td 
+                i.glyphicon.glyphicon-heart
+                i.glyphicon.glyphicon-heart
+                i.glyphicon.glyphicon-heart
+                i.glyphicon.glyphicon-heart
+              td                
+                i.glyphicon.glyphicon-fire
+                i.glyphicon.glyphicon-fire
+                i.glyphicon.glyphicon-fire
+                i.glyphicon.glyphicon-fire
+              td
+                input(type='submit', value='Ask').btn.btn-sm.btn-info
+      .well#ongoing
+        h4 
+          |Ongoing :
+        table.table.table-striped
+          thead
+            tr
+              th Name
+              th UE
+              th Mark your tutor
+              th Validation
+          tbody
+            tr
+              td Jacques Dupont
+              td UE4523
+              td
+                input#input-id.rating(type='number', min='0', max='5', step='0.5', data-size='xs')
+              td
+                input(type='submit', value='Submit').btn.btn-sm.btn-success
+                | 
+                input(type='submit', value='Cancel').btn.btn-sm.btn-danger
+            tr
+              td Pierre Dupont
+              td UE4323
+              td
+                input#input-id.rating(type='number', min='0', max='5', step='0.5', data-size='xs')
+              td
+                input(type='submit', value='Submit').btn.btn-sm.btn-success
+                | 
+                input(type='submit', value='Cancel').btn.btn-sm.btn-danger
+    script.
+      $('#tutoring').addClass('active');
+      $("#input-id").rating({'size':'lg'});

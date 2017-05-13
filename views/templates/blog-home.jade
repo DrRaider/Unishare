@@ -1,0 +1,58 @@
+doctype html
+html(lang='en')
+  head
+    // Required meta tags
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    // Bootstrap CSS
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/css/bootstrapv4.0.css')
+    link(rel='stylesheet', href='/css/blog-home.css')
+    link(rel='stylesheet', href='/css/profile-header.css')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js')
+  body
+    include /profile-header
+    .container
+      hgroup
+        h1 Come and read about other's experiences !  
+      br
+      br
+      .card-columns
+        .card
+          img.card-img-top(style='display: block;max-width:100%;', src='/img/plus.png', data-holder-rendered='true')
+          .card-block
+            h4.card-title(style='text-align: center;') Write an article
+        .card
+          img.card-img-top.img-fluid(style='display: block;max-width:100%;max-width:100%;max-width:100%;max-width:100%;max-width:100%;', src='https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/After_Storm_%283521047509%29.jpg/1920px-After_Storm_%283521047509%29.jpg', data-holder-rendered='true')
+          .card-block
+            h4.card-title Card title that wraps to a new line
+            p.card-text
+              | This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+        .card
+          img.card-img-top.img-fluid(style='display: block;max-width:100%;max-width:100%;max-width:100%;max-width:100%;', src='https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/2013AmsterdamKNSMisland04.jpg/1280px-2013AmsterdamKNSMisland04.jpg', data-holder-rendered='true')
+          .card-block
+            h4.card-title Card title that wraps to a new line
+            p.card-text
+              | This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+        .card
+          img.card-img-top.img-fluid(style='display: block;max-width:100%;max-width:100%;max-width:100%;', src='https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/2013AmsterdamKNSMisland04.jpg/1280px-2013AmsterdamKNSMisland04.jpg', data-holder-rendered='true')
+          .card-block
+            h4.card-title Card title that wraps to a new line
+            p.card-text
+              | This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+        .card
+          img.card-img-top.img-fluid(style='display: block;max-width:100%;max-width:100%;', src='http://placekitten.com/g/400/300', data-holder-rendered='true')
+          .card-block
+            h4.card-title Card title that wraps to a new line
+            p.card-text
+              | This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+        .card
+          img.card-img-top.img-fluid(style='display: block;max-width:100%;', src='https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/2013AmsterdamKNSMisland04.jpg/1280px-2013AmsterdamKNSMisland04.jpg', data-holder-rendered='true')
+          .card-block
+            h4.card-title Card title
+            p.card-text This card has supporting text below as a natural lead-in to additional content.
+            p.card-text
+              small.text-muted Last updated 3 mins ago
+    script.
+      $('#blog').addClass('active');  

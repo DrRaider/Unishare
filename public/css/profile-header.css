@@ -1,0 +1,142 @@
+body {
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+body.user main.user-header {
+  position: relative;
+  padding: 25px 0;
+  height: 200px;
+}
+body.user main.user-header h1 {
+  position: absolute;
+  top: 75px;
+  color: #eee;
+  padding: 4px 0 10px;
+  font-weight: 600;
+}
+.header-background {
+  background-image: url("https://www.imperial.ac.uk/ImageCropToolT4/imageTool/uploaded-images/Imperial12_11-152--tojpeg_1430495463656_x2.jpg");
+  background-position: center;
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+.header-box {
+  position: relative;
+  padding-left: 200px;
+}
+.header-avatar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+  border-radius: 4px;
+}
+.header-stats {
+  position: relative;
+  text-align: right;
+}
+.header-stats img {
+  width: 40%;
+  height: 40%;
+  min-height: 10%;
+  min-width: 10%;
+}
+.header-stats .header-stat strong {
+  display: block;
+  color: #333;
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 40px;
+  white-space: nowrap;
+}
+.header-stats .header-stat span {
+  color: #777;
+  font-size: 12px;
+  text-transform: uppercase;
+  text-overflow: ellipsis;
+  line-height: 20px;
+  overflow: hidden;
+}
+.header-stats .header-stat {
+  display: inline-block;
+  width: 100px;
+  text-align: center;
+  margin: 4px 0 0 8px;
+}
+main.navigation {
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+}
+.jumbotron {
+  height: 400px;
+}
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.row {
+  margin-right: -15px;
+  margin-left: -15px;
+}
+.col-xs-1,
+.col-sm-1,
+.col-md-1,
+.col-lg-1,
+.col-xs-2,
+.col-sm-2,
+.col-md-2,
+.col-lg-2,
+.col-xs-3,
+.col-sm-3,
+.col-md-3,
+.col-lg-3,
+.col-xs-4,
+.col-sm-4,
+.col-md-4,
+.col-lg-4,
+.col-xs-5,
+.col-sm-5,
+.col-md-5,
+.col-lg-5,
+.col-xs-6,
+.col-sm-6,
+.col-md-6,
+.col-lg-6,
+.col-xs-7,
+.col-sm-7,
+.col-md-7,
+.col-lg-7,
+.col-xs-8,
+.col-sm-8,
+.col-md-8,
+.col-lg-8,
+.col-xs-9,
+.col-sm-9,
+.col-md-9,
+.col-lg-9,
+.col-xs-10,
+.col-sm-10,
+.col-md-10,
+.col-lg-10,
+.col-xs-11,
+.col-sm-11,
+.col-md-11,
+.col-lg-11,
+.col-xs-12,
+.col-sm-12,
+.col-md-12,
+.col-lg-12 {
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+}

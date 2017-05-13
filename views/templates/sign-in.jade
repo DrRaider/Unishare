@@ -1,0 +1,39 @@
+doctype 
+html
+  head
+    meta(charset='UTF-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    meta(name='description', content='')
+    meta(name='author', content='')
+    link(rel='icon', href='../../favicon.ico')
+    title Sign in
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css')
+    // link(rel="stylesheet",href="css/bootstrap.min.css")
+    // Custom styles for this template
+    link(rel='stylesheet', href='/css/sign-in.css')
+    script(src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js')
+    script(src='/js/sign-in.js')
+  body
+    hgroup
+      h1 UniShare
+      h3 Sign In
+    form(action="/profile", method="POST")
+      .group
+        input(type='text', name='username')
+        span.highlight
+        span.bar
+        |     
+        label Login
+      |   
+      .group
+        input(type='Password', name='user_password')
+        span.highlight
+        span.bar
+        |     
+        label Password 
+      .group
+        input.btn.btn-primary(type="submit", value="Login")
+        p.forgot
+          a.col-md-6(href="/sign-up") Don't have an account? Sign up ! 
+          a.col-md-6.text-right(href="/forgot-password") Forgot Password?
