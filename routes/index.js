@@ -1,97 +1,94 @@
 var express = require('express')
-  , router = express.Router()
-  , user = require('../public/js/models/test.js')
-  , auth = require('./post.js');
+	, router = express.Router();
 
-router.get('/', function (req, res, next) {
-  res.render('templates/default.jade', { title: 'Home' })
-})
+var isAuthenticated = function(req, res, next) {
+	// if user is authenticated in the session, call the next() to call the next request handler 
+	// Passport adds this method to request object. A middleware is allowed to add properties to
+	// request and response objects
+	if (req.isAuthenticated())
+		return next();
+	// if the user is not authenticated then redirect him to the login page
+	console.log('oops');
+	res.redirect('/sign-in');
+}
 
-router.get('/profile', function (req, res, html) {
-  req.session = 
-    { _id: 'Nicolas',
-      _rev: '1-de50e8a394e02b95322dece2eae80384',
-      username: 'Nicolas',
-      last_name: 'SAILLY',
-      promotion: '2019',
-      age: '23',
-      nationality: 'France',
-      email: 'nsailly@live.fr',
-      date: 'May 10th 2017, 8:15:54 pm'
-    };
-  res.render('templates/profile.jade', { basedir : './views/templates', session: req.session })
-});
+var isNotAuthenticated = function(req, res, next) {
+	// if user is authenticated in the session, call the next() to call the next request handler 
+	// Passport adds this method to request object. A middleware is allowed to add properties to
+	// request and response objects
+	if (!req.isAuthenticated())
+		return next();
+	// if the user is not authenticated then redirect him to the login page
+	console.log('oops');
+	res.redirect('/profile');
+}
 
-router.get('/sign-up', function (req, res, html) {
-  res.render('templates/sign-up.jade', { title: 'Sign Up' })
-});
+module.exports = function(passport) {
 
-router.get('/sign-in', function (req, res, html) {
-  res.render('templates/sign-in.jade', { title: 'Sign In' })
-});
+	router.get('/', function(req, res, next) {
+		res.render('templates/default.jade', {
+			title: 'Home'
+		})
+	})
 
-router.get('/forgot-password', function (req, res, html) {
-  res.render('templates/forgot-password.jade', { title: 'Forgot password' })
-});
+	router.get('/profile', isAuthenticated, function(req, res, html) {
+		res.render('templates/profile.jade', {
+			basedir: './views/templates'
+		})
+	});
 
-router.get('/blog-home', function (req, res, html) {
-  req.session = 
-    { _id: 'Nicolas',
-      _rev: '1-de50e8a394e02b95322dece2eae80384',
-      username: 'Nicolas',
-      last_name: 'SAILLY',
-      promotion: '2019',
-      age: '23',
-      nationality: 'France',
-      email: 'nsailly@live.fr',
-      date: 'May 10th 2017, 8:15:54 pm'
-    };
-    console.log(req.session);
-  res.render('templates/blog-home.jade', { basedir : './views/templates', title: 'Blog' })
-});
+	router.get('/sign-up', isNotAuthenticated, function(req, res, html) {
+		res.render('templates/sign-up.jade', {
+			title: 'Sign Up'
+		})
+	});
 
-router.get('/find-tutor', function (req, res, html) {
-  req.session = 
-    { _id: 'Nicolas',
-      _rev: '1-de50e8a394e02b95322dece2eae80384',
-      username: 'Nicolas',
-      last_name: 'SAILLY',
-      promotion: '2019',
-      age: '23',
-      nationality: 'France',
-      email: 'nsailly@live.fr',
-      date: 'May 10th 2017, 8:15:54 pm'
-    };
-    console.log(req.session);
-  res.render('templates/find-tutor.jade', { basedir : './views/templates', title: 'Find tutor' })
-});
+	router.get('/sign-in', isNotAuthenticated, function(req, res, html) {
+		res.render('templates/sign-in.jade', {
+			title: 'Sign In'
+		})
+	});
 
-router.get('/welcome', function (req, res, html) {
-  res.render('templates/user.jade', { title: 'sign Up' })
-});
+	router.get('/forgot-password', isNotAuthenticated, function(req, res, html) {
+		res.render('templates/forgot-password.jade', {
+			title: 'Forgot password'
+		})
+	});
 
-router.get('/logout', function(req, res) {
-  req.session.reset();
-  res.redirect('/');
-});
+	router.get('/blog-home', isAuthenticated, function(req, res, html) {
+		res.render('templates/blog-home.jade', {
+			basedir: './views/templates',
+			title: 'Blog'
+		})
+	});
 
-router.post('/sign-up', function (req, res, html) {
-  user.register(req.body)
-  res.send(req.body);
-});
+	router.get('/find-tutor',isAuthenticated, function(req, res, html) {
+		res.render('templates/find-tutor.jade', {
+			basedir: './views/templates',
+			title: 'Find tutor'
+		})
+	});
 
-router.post('/profile', function (req, res, html) {
-  user.login(req.body,  function (e, o) {
-    if (o) {
-      //add session
-      req.session.user = o;
-      console.log(req.session.user);
-      res.redirect('/profile');
-    } else {
-      console.log("invalid email/pasword");
-      res.render('templates/sign-in.jade', { error: 'Invalid email or password.' });
-    }
-  });
-});
+	router.get('/welcome', isNotAuthenticated, function(req, res, html) {
+		res.render('templates/user.jade', {
+			title: 'sign Up'
+		})
+	});
 
-module.exports = router;
+	router.get('/logout', isNotAuthenticated, function(req, res) {
+		req.logout();
+		res.redirect('/sign-in');
+	});
+
+	router.post('/register', passport.authenticate('signup', {
+		successRedirect: '/sign-in',
+		failureRedirect: '/signup'
+	}));
+
+	router.post('/login', passport.authenticate('login', {
+		successRedirect: '/profile',
+		failureRedirect: '/sign-in'
+	}));
+
+	return router;
+}

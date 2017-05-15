@@ -5,13 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var stylus = require('stylus');
-var bcrypt = require('bcrypt');
-var should = require('should');
-var session = require('client-sessions');
-var user = require('./public/js/models/test.js');
 
-var index = require('./routes/index');
-var users = require('./routes/users');
 var app = express();
 
 // view engine setup
@@ -19,13 +13,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-
-app.use(session({
-  cookieName: 'session',
-  secret: 'random_string_goes_here',
-  duration: 30 * 60 * 1000,
-  activeDuration: 5 * 60 * 1000,
-}));
 
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -39,29 +26,29 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use('/', index);
-app.use('/users', users);
+// Configuring Passport
+var passport = require('passport');
+var expressSession = require('express-session');
+// TODO - Why Do we need this key ?
+app.use(expressSession({
+                          secret: 'mySecretKey',
+                          resave: true,
+                          saveUninitialized: true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
-app.use(function(req, res, next) {
-	console.log(req.session.username);
-  if (req.session.user && req.session.username) {
-    user.exist(req.session.user.username, function  (e, o) {
-     	//console.log(o)
-      if (o) {
-        req.user = user;
-        delete req.user.user_password; // delete the password from the session
-        req.session.user = user;  //refresh the session value
-        console.log(req.session);
-        res.locals.user = user;
-      }
-      // finishing processing the middleware and run the route
-      next();
-    });
-  } else {
-    next();
-    
-  }
-});
+// Using the flash middleware provided by connect-flash to store messages in session
+// and displaying in templates
+var flash = require('connect-flash');
+app.use(flash());
+
+// Initialize Passport
+var initPassport = require('./public/js/passport/init');
+initPassport(passport);
+
+var index = require('./routes/index')(passport);
+app.use('/', index);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

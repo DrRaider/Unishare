@@ -46,6 +46,7 @@ AM.autoLogin = function(user, user_password, callback)
 
 AM.manualLogin = function(user, user_password, callback)
 {
+	console.log("manualLogin");
 	var config = require('./config.json');
 	AM.setup(config, console.log);
 	DB.getByUsername(user,function  (e,o) {
@@ -73,6 +74,8 @@ AM.signup = function(newData, callback)
 		if (e === 'user_not_found'){ //username not found
 			DB.getByEmail(newData.email, function (e,r){ //tests to see if the email is already in the database
 				if (r === null){ //  email not found
+					var temp = 'org.couchdb.user:' + newData.username;
+					newData._id = temp;
 					AM.saltAndHash(newData.user_password, function(hash){
 						newData.user_password = hash;
 						newData.date = moment().format('MMMM Do YYYY, h:mm:ss a');
@@ -87,7 +90,7 @@ AM.signup = function(newData, callback)
 			});
 		}
 		else {
-			callback('Error: Username already taken');
+			callback('Error: Username already taken', r);
 		}
 	});
 };
@@ -99,11 +102,17 @@ AM.update = function(newData, callback)
 	if (newData.hasOwnProperty('user_password')){
 		AM.saltAndHash(newData.user_password, function(hash){
 			newData.user_password = hash;
-			DB.update(newData,console.log);
 		});
 	}else{
 		console.log("testelse");
-		DB.update(newData,console.log);
+		DB.update(newData, function(e, r) {
+				if (e) {
+					callback('Error updating user: ' + e);
+				} else {
+					callback(r);
+				}
+			});
+
 
 	}
 };
