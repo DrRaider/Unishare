@@ -18,7 +18,7 @@ DB.setup = function  (config) {
 	  , database_name = name
 },
 
-DB.update = function  (newData,callback) {
+DB.update = function  (newData, callback) {
 	DB.setup();
 	var client = DB.nano.use(database_name); //sets it to the right database
 	if (newData.username === null){
@@ -37,16 +37,17 @@ DB.update = function  (newData,callback) {
     		if(e) {
     			callback(e);
     		} else {
-    			callback(r); //success!
+    			callback(null,'ok'); //success!
     		}
 		});
+		callback(null,'ok');
 	});
 },
 
-DB.insert = function  (record,callback) {
+DB.insert = function  (record, callback) {
 	DB.setup();
 	var client = DB.nano.use(database_name); //sets it to the right database
-	client.insert(record, record._id, function(e, body){
+	client.insert(record, record.username, function(e, body){
 		if (e) { //if error means document already exists in database
 			//console.log('...stuffInACouch.js: username already exists', e.message);
 			callback('record_exists');

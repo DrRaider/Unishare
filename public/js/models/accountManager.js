@@ -85,7 +85,7 @@ AM.signup = function(newData, callback)
 					});
 				}
 				else { 
-					callback('Error: Email already taken');
+					callback('Error: Email already taken', r);
 				}
 			});
 		}
@@ -99,17 +99,18 @@ AM.update = function(newData, callback)
 {
 	var config = require('./config.json');
 	AM.setup(config, console.log);
-	if (newData.hasOwnProperty('user_password')){
+	if (newData.hasOwnProperty('user_password')) {
 		AM.saltAndHash(newData.user_password, function(hash){
 			newData.user_password = hash;
 		});
-	}else{
-		console.log("testelse");
+	} else {
+		console.log(newData);
 		DB.update(newData, function(e, r) {
-				if (e) {
+				if (e) {console.log("newData");
 					callback('Error updating user: ' + e);
 				} else {
-					callback(r);
+
+					callback(null, 'ok');
 				}
 			});
 

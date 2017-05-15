@@ -19,7 +19,6 @@ module.exports = function(passport){
                     }
                     // User and password both match, return user from done method
                     // which will be treated like success
-                    user.user_password = undefined;
                     return done(null, user);
                 }
             );

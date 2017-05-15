@@ -39,11 +39,12 @@ html(lang='en')
               a(data-toggle='tab', href='#menu1') Details
             li
               a(data-toggle='tab', href='#menu2') Skillset
+      form.form-horizontal(action='/update', method='POST', data-toggle="validator")
         .tab-content
           #home.tab-pane.fade.in.active
             .container(style='width:80%;margin:auto;')
               br
-              form#contact_form.form-horizontal(action='/sign-up', method='POST',data-toggle="validator")
+              #contact_form
                 .row
                   .col-md-6
                     .form-group
@@ -52,28 +53,28 @@ html(lang='en')
                         .input-group
                           span.input-group-addon
                             i.glyphicon.glyphicon-user
-                          input.form-control(name='username', type='text', required="required")
+                          input.form-control(name='username', type='text', value='#{user.username}')
                     .form-group
                       label.col-md-12 Last Name
                       .col-md-12.inputGroupContainer
                         .input-group
                           span.input-group-addon
                             i.glyphicon.glyphicon-user
-                          input.form-control(name='last_name', placeholder='Last Name', type='text', required="required")
+                          input.form-control(name='last_name', placeholder='Last Name', type='text', value='#{user.last_name}')
                     .form-group
                       label.col-md-12 Promotion
                       .col-md-12.selectContainer
                         .input-group
                           span.input-group-addon
                             i.glyphicon.glyphicon-briefcase
-                          input.form-control(name='promotion', placeholder='1936 - 20XX', type='text',  required="required")
+                          input.form-control(name='promotion', placeholder='1936 - 20XX', type='text', value='#{user.promotion}')
                     .form-group
                       label.col-md-12 Age
                       .col-md-12.inputGroupContainer
                         .input-group
                           span.input-group-addon
                             i.glyphicon.glyphicon-time
-                          input.form-control(name='age', placeholder='Age', type='number', required="required")
+                          input.form-control(name='age', placeholder='Age', type='number', value='#{user.age}')
                   .col-md-6 
                     .form-group
                       label.col-md-12 Nationality
@@ -81,28 +82,28 @@ html(lang='en')
                         .input-group
                           span.input-group-addon
                             i.glyphicon.glyphicon-globe
-                          input.form-control(name='nationality', placeholder='Nationality', type='text', required="required")
+                          input.form-control(name='nationality', placeholder='Nationality', type='text', value='#{user.nationality}')
                     .form-group
                       label.col-md-12 Profile picture
                       .col-md-12.inputGroupContainer
                         .input-group
                           span.input-group-addon
                             i.glyphicon.glyphicon-camera
-                          input.form-control(name='file', type='file', id="file", required="required")
+                          input.form-control(name='file', type='file', id="file")
                     .form-group
                       label.col-md-12 Password
                       .col-md-12.inputGroupContainer
                         .input-group
                           span.input-group-addon
                             i.glyphicon.glyphicon-lock
-                          input.form-control(name='user_password', placeholder='Password', type='password', data-match="#user_password", required="required")
+                          input.form-control(name='user_password', placeholder='Password', type='password', data-match="#user_password")
                     .form-group
                       label.col-md-12 Confirm Password
                       .col-md-12.inputGroupContainer
                         .input-group
                           span.input-group-addon
                             i.glyphicon.glyphicon-lock
-                          input.form-control(name='confirm_password', placeholder='Confirm Password', type='password', data-match="#user_password", required="required")
+                          input.form-control(name='confirm_password', placeholder='Confirm Password', type='password', data-match="#user_password")
                     // Select Basic
                   .form-group
                     // Button
@@ -110,10 +111,10 @@ html(lang='en')
                     .col-md-4
                     .col-md-4
                       br
-                      input.collapsed(type='submit', value='Submit').btn.btn-md.btn-primary
+                      input(type='submit', value='Submit').btn.btn-md.btn-primary
           #menu1.tab-pane.fade
             .container(style='width:80%;margin:auto;')
-              form#hobbies_form.form-horizontal(action='/sign-up', method='POST')
+              #hobbies_form
                 .row
                   .col-md-12
                     br
@@ -124,7 +125,7 @@ html(lang='en')
                         .input-group
                           span.input-group-addon
                             i.glyphicon.glyphicon-tag
-                          input#tokenfield.form-control(name='hobbies', placeholder='Hobby, Hobby, ...', type='text', required="required")
+                          input#tokenfield.form-control(name='hobbies', placeholder='Hobby, Hobby, ...', type='text', value='#{user.hobbies}')
                     // Text input
                     .form-group
                       label.col-md-12 Bio
@@ -132,18 +133,18 @@ html(lang='en')
                         .input-group
                           span.input-group-addon
                             i.glyphicon.glyphicon-align-left
-                          textarea.form-control(name='bio', placeholder="Introduce yourself ! :)",style="resize:none", rows="5", required="required")
+                          textarea.form-control(name='bio', placeholder="Introduce yourself ! :)", style="resize:none", rows="5", value='#{user.bio}')
                   .form-group
                     // Button
                     label.col-md-12
                     .col-md-4
                     .col-md-4
                       br
-                      input.collapsed(type='submit', value='Submit').btn.btn-md.btn-primary
+                      input(type='submit', value='Submit').btn.btn-md.btn-primary
           #menu2.tab-pane.fade
             .container(style='width:80%;margin:auto;')
               br
-              form#skills_form.form-horizontal(action='/sign-up', method='POST')
+              #skills_form
                 #items
                   .form-group
                     label.col-md-12 Be a tutor ?
@@ -161,12 +162,12 @@ html(lang='en')
                       .input-group
                         span.input-group-addon
                           i.glyphicon.glyphicon-education
-                        input.form-control(name='skills[]', placeholder='UEXXX', type='text', required="required")
+                        input.form-control(name='skills[]', placeholder='UEXXX', type='text')
                     .col-md-4
                       .input-group
                         span.input-group-addon
                           i.fa.fa-trophy
-                        input.form-control(name='skills[][]', placeholder='Level (0 to 20)', type='text', required="required")
+                        input.form-control(name='skills[][]', placeholder='Level (0 to 20)', type='text')
                     button#delete.btn.btn-default.delete(style='width=40px;') Delete
                 // Success message
                 .form-group
@@ -179,6 +180,15 @@ html(lang='en')
                       | New Field
                   .col-md-3
                     br
-                    input.collapsed(type='submit', value='Submit', data-parent='#accordion', href='#collapseTwo', aria-expanded='true', aria-controls='collapseTwo', id='submit_skills').btn.btn-md.btn-primary
+                    input(type='submit', value='Submit').btn.btn-md.btn-primary
 script.
     $('#profile').addClass('active');
+    $(document).ready(function(){
+      $("form").submit(function(){
+        $("input").each(function(index, obj){
+          if($(obj).val() == "") {
+            $(obj).remove();
+          }
+        });
+      });
+    });

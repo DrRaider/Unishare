@@ -1,6 +1,7 @@
 var express = require('express')
-	, router = express.Router();
-
+	, router = express.Router()
+	, signup = require('../public/js/passport/signup')
+	, update = require('../public/js/passport/update');
 var isAuthenticated = function(req, res, next) {
 	// if user is authenticated in the session, call the next() to call the next request handler 
 	// Passport adds this method to request object. A middleware is allowed to add properties to
@@ -33,7 +34,8 @@ module.exports = function(passport) {
 
 	router.get('/profile', isAuthenticated, function(req, res, html) {
 		res.render('templates/profile.jade', {
-			basedir: './views/templates'
+			basedir: './views/templates',
+			user: req.user
 		})
 	});
 
@@ -75,20 +77,35 @@ module.exports = function(passport) {
 		})
 	});
 
-	router.get('/logout', isNotAuthenticated, function(req, res) {
+	router.get('/logout', function(req, res) {
 		req.logout();
 		res.redirect('/sign-in');
 	});
 
-	router.post('/register', passport.authenticate('signup', {
-		successRedirect: '/sign-in',
-		failureRedirect: '/signup'
-	}));
+	router.post('/register', function (req, res, html) {
+		signup.createUser(req.body, function (e, r) {
+			if (e)
+				console.log("err");
+			else
+				console.log("gg");	
+		});
+		res.redirect("/welcome");
+	});
 
 	router.post('/login', passport.authenticate('login', {
 		successRedirect: '/profile',
 		failureRedirect: '/sign-in'
 	}));
+
+	router.post('/update', function (req, res, html) {
+		update.update(req.body, function (e, r) {
+			if (e)
+				console.log("err");
+			else
+				console.log("gg");	
+		});
+		res.redirect("/profile");
+	});
 
 	return router;
 }
