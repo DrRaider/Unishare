@@ -15,4 +15,4 @@ npm run watch
 
 ## Screenshot
 
-![Screenshot](http://imgur.com/LHODECH)
+![Screenshot](http://i.imgur.com/LHODECH.png)
