@@ -15,4 +15,4 @@ npm run watch
 
 ## Screenshot
 
-![Screenshot](https://raw.githubusercontent.com/bengourley/basic-express-site-2016/master/screenshot.png)
+![Screenshot](http://imgur.com/LHODECH)
