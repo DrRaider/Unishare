@@ -168,12 +168,12 @@ html
                         .input-group
                           span.input-group-addon
                             i.glyphicon.glyphicon-education
-                          input.form-control(name='skills[]', placeholder='Skill', type='text', required="required")
+                          input.form-control(name='skills[0][]', placeholder='Skill', type='text', required="required")
                       .col-md-4
                         .input-group
                           span.input-group-addon
                             i.fa.fa-trophy
-                          input.form-control(name='skills[][]', placeholder='Level (0 to 20)', type='text', required="required")
+                          input.form-control(name='skills[0][]', placeholder='Level (0 to 20)', type='text', required="required")
                       button#delete.btn.btn-default.delete(style='width=40px;') Delete
                   // Success message
                   .form-group

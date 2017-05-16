@@ -10,9 +10,16 @@ utils.buildViews = function(client){
 	client.insert(
 	{ "views": 
 		{ "email": 
-			{ "map": function(doc) { emit(doc.email); } } 
+			{ "map": function(doc) {
+					    for (var cur in doc.skills) {
+					        if(doc.skills[cur] && doc.username) {
+					            emit([doc.skills[cur][O], doc.username],doc.skills[cur][1],);
+					        }
+					    }
+					}
+ 			} 
 		}
-	}, '_design/userAccount', function (e, response) {
+	}, '_design/skills', function (e, response) {
 		if (e) {
 			//console.log('...buildACouch: view exists!' + e);
 		}

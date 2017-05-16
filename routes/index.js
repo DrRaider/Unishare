@@ -2,6 +2,8 @@ var express = require('express')
 	, router = express.Router()
 	, signup = require('../public/js/passport/signup')
 	, update = require('../public/js/passport/update');
+
+
 var isAuthenticated = function(req, res, next) {
 	// if user is authenticated in the session, call the next() to call the next request handler 
 	// Passport adds this method to request object. A middleware is allowed to add properties to
@@ -9,7 +11,7 @@ var isAuthenticated = function(req, res, next) {
 	if (req.isAuthenticated())
 		return next();
 	// if the user is not authenticated then redirect him to the login page
-	console.log('oops');
+	console.log('welcome');
 	res.redirect('/sign-in');
 }
 
@@ -67,12 +69,13 @@ module.exports = function(passport) {
 	router.get('/find-tutor',isAuthenticated, function(req, res, html) {
 		res.render('templates/find-tutor.jade', {
 			basedir: './views/templates',
-			title: 'Find tutor'
+			title: 'Find tutor',
+
 		})
 	});
 
 	router.get('/welcome', isNotAuthenticated, function(req, res, html) {
-		res.render('templates/user.jade', {
+		res.render('templates/welcome.jade', {
 			title: 'sign Up'
 		})
 	});
@@ -109,3 +112,4 @@ module.exports = function(passport) {
 
 	return router;
 }
+//zdazdqd

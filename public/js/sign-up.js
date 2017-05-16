@@ -26,12 +26,15 @@ $('.panel-group').on('shown.bs.collapse', toggleIcon);
         return o;
     };
 })(jQuery);
-
+var howMany = 0;
 
 $(document).ready(function($) {
   //when the Add Filed button is clicked
+  	
   	$("#add").click(function (e) {
-    //Append a new row of code to the "#items" div
+		howMany++;
+		console.log(howMany);
+    	//Append a new row of code to the "#items" div
     	$("#items").append(
 	        '<div class="form-group"> \
 	          <div class="col-md-6"> \
@@ -39,14 +42,14 @@ $(document).ready(function($) {
 	              <span class="input-group-addon"> \
 	                <i class="glyphicon glyphicon-education"></i> \
 	              </span> \
-	              <input name="input[]" placeholder="Skill" type="text" class="form-control" required="required"> \
+	              <input name="skills[' + howMany + '][]" placeholder="Skill" type="text" class="form-control" required="required"> \
 	            </div> \
 	          </div> \
 	          <div class="col-md-4"> \
 	            <div class="input-group"> \
 	              <span class="input-group-addon"> \
 	                <i class="fa fa-trophy"></i> \
-	              </span> \ <input name="input[][]" placeholder="Level (0 to 20)" type="text" class="form-control" required="required"> \
+	              </span> \ <input name="skills[' + howMany + '][]" placeholder="Level (0 to 20)" type="text" class="form-control" required="required"> \
 	            </div> \
 	          </div> \
 	          <button id="delete" class="btn btn-default delete" style="width=40px;">Delete</button> \
@@ -65,13 +68,14 @@ $(document).ready(function($) {
 		$("#submit_contact").attr("data-toggle", "collapse");
 		$("#submit_contact").click();
 	    var $this = $(this); // `this` refers to the current form element
-	    var data = JSON.stringify($(this).serializeFormJSON());
+	    var data = $this;
 	    console.log(data);
 	    $.post(
 	        $this.attr("action"), // Gets the URL to sent the post to
 	        $this.serialize(), // Serializes form data in standard format
 	        function(data) { 
 	        	console.log("success");
+
  			},
 	        "json" // The format the response should be in
 	    );
@@ -100,12 +104,14 @@ $(document).ready(function($) {
 		$("#submit_skills").click();
 	    var $this = $(this); // `this` refers to the current form element
 	    var data = JSON.stringify($(this).serializeFormJSON());
-	     console.log(data);
+	    console.log(data);
 	    $.post(
 	        $this.attr("action"), // Gets the URL to sent the post to
 	        $this.serialize(), // Serializes form data in standard format
 	        function(data) { 
 	        	console.log("success");
+	        	url = "http://localhost/welcome";
+      			$(location).attr("href", url)
  			},
 	        "json" // The format the response should be in
 	    );

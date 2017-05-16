@@ -14,8 +14,8 @@ module.exports = function(passport){
                 function(err, user) {
                     // In case of any error, return using the done method
                     if (err) {
-                        console.log("err while login");
-                        return done(err);
+                        console.log("err while login", err);
+                        return done(null, false, err);
                     }
                     // User and password both match, return user from done method
                     // which will be treated like success
