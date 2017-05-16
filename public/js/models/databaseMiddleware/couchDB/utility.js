@@ -10,14 +10,14 @@ utils.buildViews = function(client){
 	client.insert(
 	{ "views": 
 		{ "email": 
-			{ "map": function(doc) {
-					    for (var cur in doc.skills) {
-					        if(doc.skills[cur] && doc.username) {
-					            emit([doc.skills[cur][O], doc.username],doc.skills[cur][1],);
-					        }
-					    }
-					}
- 			} 
+			{ "map":  	function(doc) {
+							for (var cur in doc.skills) {
+								if(doc.skills[cur] && doc.skills[cur][0]) {
+									emit(doc.skills[cur][1] ,doc.skills[cur][0],doc);
+								}
+							}
+						}
+			}
 		}
 	}, '_design/skills', function (e, response) {
 		if (e) {

@@ -23,18 +23,18 @@ html
         h3 Sign Up
       br
       br
-      #accordion.panel-group(role='tablist', aria-multiselectable='true')
-        .panel.panel-default
-          #headingOne.panel-heading(role='tab')
-            h4.panel-title
-              a(role='button', data-toggle='collapse', data-parent='#accordion', href='#collapseOne', aria-expanded='true', aria-controls='collapseOne') 
-                i.short-full.glyphicon.glyphicon-minus
-                | Overview
-          #collapseOne.panel-collapse.collapse.in(role='tabpanel', aria-labelledby='headingOne')
-            .panel-body
-              .container(style='width:80%;margin:auto;')
-                br
-                form#contact_form.form-horizontal(action='/register', method='POST',data-toggle="validator")
+      form#contact_form.form-horizontal(action='/register', method='POST',data-toggle="validator")
+        #accordion.panel-group(role='tablist', aria-multiselectable='true')
+          .panel.panel-default
+            #headingOne.panel-heading(role='tab')
+              h4.panel-title
+                a(role='button', data-toggle='collapse', data-parent='#accordion', href='#collapseOne', aria-expanded='true', aria-controls='collapseOne') 
+                  i.short-full.glyphicon.glyphicon-minus
+                  | Overview
+            #collapseOne.panel-collapse.collapse.in(role='tabpanel', aria-labelledby='headingOne')
+              .panel-body
+                .container(style='width:80%;margin:auto;')
+                  br
                   .row
                     .col-md-6
                       .form-group
@@ -101,27 +101,21 @@ html
                       .col-md-4
                       .col-md-4
                         br
-                        input.collapsed(type='submit', value='Submit', data-parent='#accordion', href='#collapseTwo', aria-expanded='true', aria-controls='collapseTwo', id='submit_contact').btn.btn-md.btn-primary
-        .panel.panel-default
-          #headingTwo.panel-heading(role='tab')
-            h4.panel-title
-              a.collapsed(role='button', data-toggle='collapse', data-parent='#accordion', href='#collapseTwo', aria-expanded='true', aria-controls='collapseTwo')
-                i.short-full.glyphicon.glyphicon-plus
-                | Details
-          #collapseTwo.panel-collapse.collapse(role='tabpanel', aria-labelledby='headingTwo')
-            .panel-body
-              .container(style='width:80%;margin:auto;')
-                br
-                form#hobbies_form.form-horizontal(action='/register', method='POST')
+                        a.collapsed(role='button', data-toggle='collapse', data-parent='#accordion', href='#collapseTwo', aria-expanded='true', aria-controls='collapseTwo').btn.btn-md.btn-primary
+                          | Next 
+                          span.glyphicon.glyphicon-send
+          .panel.panel-default
+            #headingTwo.panel-heading(role='tab')
+              h4.panel-title
+                a.collapsed(role='button', data-toggle='collapse', data-parent='#accordion', href='#collapseTwo', aria-expanded='true', aria-controls='collapseTwo')
+                  i.short-full.glyphicon.glyphicon-plus
+                  | Details
+            #collapseTwo.panel-collapse.collapse(role='tabpanel', aria-labelledby='headingTwo')
+              .panel-body
+                .container(style='width:80%;margin:auto;')
+                  br
                   .row
                     .col-md-12
-                      .form-group
-                        label.col-md-12 Hobbies
-                        .col-md-12.inputGroupContainer
-                          .input-group
-                            span.input-group-addon
-                              i.glyphicon.glyphicon-tag
-                            input.form-control(name='username', value = "Julie", type='text', required="required")
                       .form-group
                         label.col-md-12 Hobbies
                         .col-md-12.inputGroupContainer
@@ -143,26 +137,20 @@ html
                       .col-md-4
                       .col-md-4
                         br
-                        input.collapsed(type='submit', value='Submit', data-parent='#accordion', href='#collapseThree', aria-expanded='true', aria-controls='collapseThree', id='submit_bio').btn.btn-md.btn-primary
-        .panel.panel-default
-          #headingThree.panel-heading(role='tab')
-            h4.panel-title
-              a.collapsed(role='button', data-toggle='collapse', data-parent='#accordion', href='#collapseThree', aria-expanded='false', aria-controls='collapseThree')
-                i.short-full.glyphicon.glyphicon-plus
-                | Skillset
-          #collapseThree.panel-collapse.collapse(role='tabpanel', aria-labelledby='headingThree')
-            .panel-body
-              .container(style='width:80%;margin:auto;')
-                br
-                form#skills_form.form-horizontal(action='/register', method='POST')
+                        a.collapsed(role='button', data-toggle='collapse', data-parent='#accordion', href='#collapseThree', aria-expanded='true', aria-controls='collapseThree').btn.btn-md.btn-primary
+                          | Next 
+                          span.glyphicon.glyphicon-send          
+          .panel.panel-default
+            #headingThree.panel-heading(role='tab')
+              h4.panel-title
+                a.collapsed(role='button', data-toggle='collapse', data-parent='#accordion', href='#collapseThree', aria-expanded='false', aria-controls='collapseThree')
+                  i.short-full.glyphicon.glyphicon-plus
+                  | Skillset
+            #collapseThree.panel-collapse.collapse(role='tabpanel', aria-labelledby='headingThree')
+              .panel-body
+                .container(style='width:80%;margin:auto;')
+                  br
                   #items
-                    .form-group
-                      label.col-md-12 Hobbies
-                      .col-md-12.inputGroupContainer
-                        .input-group
-                          span.input-group-addon
-                            i.glyphicon.glyphicon-tag
-                          input.form-control(name='username', value = "Julie", type='text', required="required")
                     .form-group
                       .col-md-6
                         .input-group
@@ -174,7 +162,6 @@ html
                           span.input-group-addon
                             i.fa.fa-trophy
                           input.form-control(name='skills[0][]', placeholder='Level (0 to 20)', type='text', required="required")
-                      button#delete.btn.btn-default.delete(style='width=40px;') Delete
                   // Success message
                   .form-group
                     // Button

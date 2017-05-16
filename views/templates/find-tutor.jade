@@ -16,7 +16,6 @@ html(lang='en')
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js')
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js')
     script(src='/js/star-rating.js')
-    script(src='/js/tutoring.js')
     // script(src="js/jquery.min.js")
     // script(src="js/bootstrap.min.js")
   body
@@ -24,7 +23,7 @@ html(lang='en')
     .container.container_search
       br
       .well
-        form.form2.form-horizontal(action='', method='')
+        form.form2.form-horizontal#search(action='/search-tutors', method='POST')
           .row
             .form-group
               .col-md-5
@@ -33,69 +32,89 @@ html(lang='en')
                   .input-group
                     span.input-group-addon
                       i.glyphicon.glyphicon-education
-                    select#sel1.form-control
-                      option UE1
-                      option UE2
-                      option UE3
-                      option UE4
+                    select#sel1.form-control(name= "skill")
+                      option 1
+                      option 2
+                      option 3
+                      option 4
               .col-md-4
                 label.col-md-12 &nbsp;
                 .col-md-12.inputGroupContainer
                   .input-group
                     input(type='submit', value='Search').btn.btn-md.btn-info
-      .well#search_result
-        h4 
-          |Results :
-        table.table.table-striped
-          thead
-            tr
-              th Name
-              th Tutor rating
-              th UE Level
-              th Ask
-          tbody
-            tr
-              td Jacques Dupont
-              td 
-                i.glyphicon.glyphicon-heart
-                i.glyphicon.glyphicon-heart
-                i.glyphicon.glyphicon-heart
-                i.glyphicon.glyphicon-heart
-                i.glyphicon.glyphicon-heart
-              td                
-                i.glyphicon.glyphicon-fire
-                i.glyphicon.glyphicon-fire
-                i.glyphicon.glyphicon-fire
-              td
-                input(type='submit', value='Ask').btn.btn-sm.btn-info
-            tr
-              td Paul Dupont
-              td 
-                i.glyphicon.glyphicon-heart
-                i.glyphicon.glyphicon-heart
-                i.glyphicon.glyphicon-heart
-              td                
-                i.glyphicon.glyphicon-fire
-                i.glyphicon.glyphicon-fire
-                i.glyphicon.glyphicon-fire
-                i.glyphicon.glyphicon-fire
-                i.glyphicon.glyphicon-fire
-              td
-                input(type='submit', value='Ask').btn.btn-sm.btn-info
-            tr
-              td Georges Dupont
-              td 
-                i.glyphicon.glyphicon-heart
-                i.glyphicon.glyphicon-heart
-                i.glyphicon.glyphicon-heart
-                i.glyphicon.glyphicon-heart
-              td                
-                i.glyphicon.glyphicon-fire
-                i.glyphicon.glyphicon-fire
-                i.glyphicon.glyphicon-fire
-                i.glyphicon.glyphicon-fire
-              td
-                input(type='submit', value='Ask').btn.btn-sm.btn-info
+      if find
+        .well#search_result
+          h4 
+            |Results :
+          form#res(action='/ask', method='POST')
+            table#results.table.table-striped
+              thead
+                tr
+                  th Name
+                  th Tutor rating
+                  th UE Level
+                  th Ask
+              tbody
+                if find
+                  for i in find
+                    tr
+                      td= i.id
+                      if i.key[0] == "1" || i.key[0] == "0"
+                        td
+                          i.glyphicon.glyphicon-heart
+                      if i.key[0] == "2"
+                        td
+                          i.glyphicon.glyphicon-heart
+                          i.glyphicon.glyphicon-heart                
+                      if i.key[0] == "3"
+                        td
+                          i.glyphicon.glyphicon-heart
+                          i.glyphicon.glyphicon-heart
+                          i.glyphicon.glyphicon-heart
+                      if i.key[0] == "4"
+                        td
+                          i.glyphicon.glyphicon-heart
+                          i.glyphicon.glyphicon-heart
+                          i.glyphicon.glyphicon-heart
+                          i.glyphicon.glyphicon-heart
+                      if i.key[0] == "5"
+                        td
+                          i.glyphicon.glyphicon-heart
+                          i.glyphicon.glyphicon-heart
+                          i.glyphicon.glyphicon-heart
+                          i.glyphicon.glyphicon-heart
+                          i.glyphicon.glyphicon-heart
+                      if i.key[1] == "1" || i.key[1] == "0"
+                        td
+                          i.glyphicon.glyphicon-fire
+                      if i.key[1] == "2"
+                        td
+                          i.glyphicon.glyphicon-fire
+                          i.glyphicon.glyphicon-fire                
+                      if i.key[1] == "3"
+                        td
+                          i.glyphicon.glyphicon-fire
+                          i.glyphicon.glyphicon-fire
+                          i.glyphicon.glyphicon-fire
+                      if i.key[1] == "4"
+                        td
+                          i.glyphicon.glyphicon-fire
+                          i.glyphicon.glyphicon-fire
+                          i.glyphicon.glyphicon-fire
+                          i.glyphicon.glyphicon-fire
+                      if i.key[1] == "5"
+                        td
+                          i.glyphicon.glyphicon-fire
+                          i.glyphicon.glyphicon-fire
+                          i.glyphicon.glyphicon-fire
+                          i.glyphicon.glyphicon-fire
+                          i.glyphicon.glyphicon-fire
+                      td
+                        label
+                          input(type="radio" name="prof", value="#{i.id}")
+                  input(type="hidden" name="skill", value="#{find[0].value}")
+            .col-md-11
+            input(type='submit', value='Ask').btn.btn-sm.btn-info
       .well#ongoing
         h4 
           |Ongoing :
@@ -107,24 +126,16 @@ html(lang='en')
               th Mark your tutor
               th Validation
           tbody
-            tr
-              td Jacques Dupont
-              td UE4523
-              td
-                input#input-id.rating(type='number', min='0', max='5', step='0.5', data-size='xs')
-              td
-                input(type='submit', value='Submit').btn.btn-sm.btn-success
-                | 
-                input(type='submit', value='Cancel').btn.btn-sm.btn-danger
-            tr
-              td Pierre Dupont
-              td UE4323
-              td
-                input#input-id.rating(type='number', min='0', max='5', step='0.5', data-size='xs')
-              td
-                input(type='submit', value='Submit').btn.btn-sm.btn-success
-                | 
-                input(type='submit', value='Cancel').btn.btn-sm.btn-danger
+            for j in classes
+              tr
+                td= j.key[0]
+                td= j.key[1]
+                td
+                  input#input-id.rating(type='number', min='0', max='5', step='0.5', data-size='xs')
+                td
+                  input(type='submit', value='Submit').btn.btn-sm.btn-success
+                  | 
+                  input(type='submit', value='Cancel').btn.btn-sm.btn-danger
     script.
       $('#tutoring').addClass('active');
       $("#input-id").rating({'size':'lg'});

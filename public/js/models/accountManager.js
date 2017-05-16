@@ -33,13 +33,28 @@ AM.getByEmail = function  (email,callback) {
 	})
 }
 
-AM.autoLogin = function(user, user_password, callback)
+AM.getSkill = function(skill, callback)
 {
-	DB.getByUsername(user, function  (e,o) {
+	var config = require('./config.json');
+	AM.setup(config, console.log);
+	DB.getSkill(skill, function  (e,o) {
 		if (o){
-			o.user_password === user_password ? callback(null,o) : callback('invalid_password', false);
+			callback(null, o);
 		}	else {
-			callback('user_not_found', false);
+			callback('skill_not_found', false);
+		}
+	})
+}
+
+AM.getClasses = function(user, callback)
+{
+	var config = require('./config.json');
+	AM.setup(config, console.log);
+	DB.getClasses(user, function  (e,o) {
+		if (o){
+			callback(null, o);
+		}	else {
+			callback('skill_not_found', false);
 		}
 	})
 }
@@ -104,9 +119,8 @@ AM.update = function(newData, callback)
 			newData.user_password = hash;
 		});
 	} else {
-		console.log(newData);
 		DB.update(newData, function(e, r) {
-				if (e) {console.log("newData");
+				if (e) {
 					callback('Error updating user: ' + e);
 				} else {
 
@@ -117,6 +131,16 @@ AM.update = function(newData, callback)
 
 	}
 };
+
+AM.insertObj = function(data, database, callback) {
+	DB.insertObj(data, database, function (e,r) {
+		if (e) {
+			callback('Error inserting: ' + e);
+		} else {
+			callback(null, 'ok');
+		}
+	});
+}
 
 AM.setPassword = function(email,newPass, callback)
 {
@@ -165,7 +189,8 @@ AM.delete = function(id, callback)
 
 AM.buildDB = function(callback)
 {
-	DB.buildDB(callback)
+	DB.buildDB(callback);
+	DB.buildOtherDB(callback);
 }
 
 AM.destroyDB = function(callback)

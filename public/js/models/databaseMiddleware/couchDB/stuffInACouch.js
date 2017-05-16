@@ -58,6 +58,20 @@ DB.insert = function  (record, callback) {
 	});
 },
 
+DB.insertObj = function  (record, database, callback) {
+	DB.setup();
+	var client = DB.nano.use(('tutoring')); //sets it to the right database
+	client.insert(record, function(e, body){
+		if (e) { //if error means document already exists in database
+			//console.log('...stuffInACouch.js: username already exists', e.message);
+			callback('record_exists');
+		} else {
+			//console.log('...stuffInACouch.js: ', record.username, 'successfully created'); //success!
+			callback(null,'ok');
+		}
+	});
+},
+
 //getByUsername
 //in: username, callback 
 DB.getByUsername = function  (user, callback) {
@@ -69,7 +83,6 @@ DB.getByUsername = function  (user, callback) {
 			callback('user_not_found',null);
 		}
 		else{
-			console.log(r);
 			callback(null,r);
 		}
 	});
@@ -94,9 +107,51 @@ DB.getByEmail = function  (email, callback) {
 		else //email already exists
 		{
 			var id = r.rows[0].id;
-			DB.getByUsername(id,callback);
+			DB.getByUsername(id,callback); 
 		};
 	});
+},
+
+//getByEmail
+//in: username, callback 
+DB.getSkill = function  (skill, callback) {
+	DB.setup();
+	var client = DB.nano.use(database_name); //sets it to the right database
+	client.view('skill','skills_mark', {descending: true},
+					function(e, r) { //checks to see if email is already registered
+					  	if (!e) {
+							for (var i = r.rows.length - 1; i >= 0; i--) {
+							    if (r.rows[i].value !== skill) { 
+							        r.rows.splice(i, 1);
+							    }
+							    else
+							    	console.log(r.rows[i].key);
+							}
+							console.log('getSkill');
+					    	callback(null, r.rows);
+					  	} else {
+					  		callback(e);
+					  	}
+					});
+},
+
+DB.getClasses = function  (user, callback) {
+	DB.setup();
+	var client = DB.nano.use('tutoring'); //sets it to the right database
+	client.view('class','user_class',
+					function(e, r) { //checks to see if email is already registered
+					  	if (!e) {
+							for (var i = r.rows.length - 1; i >= 0; i--) {
+							    if (r.rows[i].value !== user) { 
+							        r.rows.splice(i, 1);
+							    }
+							}
+							console.log(r.rows);
+					    	callback(null, r.rows);
+					  	} else {
+					  		callback(e);
+					  	}
+					});
 },
 
 //sets up the Db 
@@ -116,6 +171,22 @@ DB.buildDB = function(callback) {
 		}
 	});
 },
+
+DB.buildOtherDB = function(callback) {
+	DB.setup();
+	DB.nano.db.create('tutoring', function(err, body) {
+		var client = DB.nano.use('tutoring'); //sets it to the right database
+		if (err) {
+			console.log('Warning: Database already exist !');
+			callback(null);
+		}
+		else {
+			console.log('...stuffInACouch: created database');
+			callback(null);
+		}
+	});
+},
+
 //destroy the DB created by accountManager
 DB.destroyDB = function(callback) { //because some men just want to watch the world burn
 	DB.setup();

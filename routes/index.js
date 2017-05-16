@@ -1,8 +1,8 @@
 var express = require('express')
 	, router = express.Router()
 	, signup = require('../public/js/passport/signup')
-	, update = require('../public/js/passport/update');
-
+	, update = require('../public/js/passport/update')
+	, findTutor = require('../public/js/tutoring');
 
 var isAuthenticated = function(req, res, next) {
 	// if user is authenticated in the session, call the next() to call the next request handler 
@@ -67,11 +67,18 @@ module.exports = function(passport) {
 	});
 
 	router.get('/find-tutor',isAuthenticated, function(req, res, html) {
-		res.render('templates/find-tutor.jade', {
-			basedir: './views/templates',
-			title: 'Find tutor',
-
-		})
+		findTutor.getClasses(req.user.username, function(e, o) {
+			if (e)
+				console.log("err");
+			else {
+				console.log("gotcha");	
+				res.render('templates/find-tutor.jade', {
+					basedir: './views/templates',
+					title: 'Find tutor',
+					classes: o
+				});
+			}
+		});
 	});
 
 	router.get('/welcome', isNotAuthenticated, function(req, res, html) {
@@ -89,8 +96,6 @@ module.exports = function(passport) {
 		signup.createUser(req.body, function (e, r) {
 			if (e)
 				console.log("err");
-			else
-				console.log("gg");	
 		});
 		res.redirect("/welcome");
 	});
@@ -105,9 +110,42 @@ module.exports = function(passport) {
 			if (e)
 				console.log("err");
 			else
-				console.log("gg");	
+				console.log("updated");	
 		});
 		res.redirect("/profile");
+	});
+
+	router.post('/search-tutors', isAuthenticated, function(req, res, html) {
+		findTutor.getTutor(req.body.skill, function(e, r) {
+			if(e)
+				console.log(e);
+			else {
+				console.log('res : ');
+				findTutor.getClasses(req.user.username, function(e, o) {
+					if (e)
+						console.log("err");
+					else {
+						console.log("gotcha");	
+						res.render('templates/find-tutor.jade', {
+							basedir: './views/templates',
+							title: 'Find tutor',
+							classes: o,
+							find: r
+						});
+					}
+		});
+			}
+		});
+	});
+
+	router.post('/ask', isAuthenticated, function(req, res, html) {
+		findTutor.createClass(req.user.username, req.body.prof, req.body.skill, function(e, o) {
+			if (e)
+				console.log('error:', e);
+			else
+				console.log("ggggggggggggggggggggggggg");
+			res.redirect('/find-tutor');
+		});
 	});
 
 	return router;

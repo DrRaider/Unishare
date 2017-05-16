@@ -1,11 +1,11 @@
-var LocalStrategy   = require('passport-local').Strategy;
+var LocalStrategy = require('passport-local').Strategy;
 var AM = require('../models/accountManager.js');
 
 module.exports = function(passport){
 
 	passport.use('login', new LocalStrategy({
             usernameField: 'username',
-             passwordField: 'user_password',
+            passwordField: 'user_password',
             passReqToCallback : true
         },
         function(req, username, password, done) { 

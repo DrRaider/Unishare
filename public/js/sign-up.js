@@ -62,59 +62,5 @@ $(document).ready(function($) {
 
 	$('#tokenfield').tokenfield({});
 
-	$("#contact_form").submit(function(e) {
-	    e.preventDefault(); // Prevents the page from refreshing
-	    $(this.confirm_password).remove(); //removing field 1 from query
-		$("#submit_contact").attr("data-toggle", "collapse");
-		$("#submit_contact").click();
-	    var $this = $(this); // `this` refers to the current form element
-	    var data = $this;
-	    console.log(data);
-	    $.post(
-	        $this.attr("action"), // Gets the URL to sent the post to
-	        $this.serialize(), // Serializes form data in standard format
-	        function(data) { 
-	        	console.log("success");
-
- 			},
-	        "json" // The format the response should be in
-	    );
-	});
-
-	$("#hobbies_form").submit(function(e) {
-	    e.preventDefault(); // Prevents the page from refreshing
-		$("#submit_bio").attr("data-toggle", "collapse");
-		$("#submit_bio").click();
-	    var $this = $(this); // `this` refers to the current form element
-	    var data = JSON.stringify($(this).serializeFormJSON());
-	     console.log(data);
-	    $.post(
-	        $this.attr("action"), // Gets the URL to sent the post to
-	        $this.serialize(), // Serializes form data in standard format
-	        function(data) { 
-	        	console.log("success");
- 			},
-	        "json" // The format the response should be in
-	    );
-	});
-
-	$("#skills_form").submit(function(e) {
-	    e.preventDefault(); // Prevents the page from refreshing
-		$("#submit_skills").attr("data-toggle", "collapse");
-		$("#submit_skills").click();
-	    var $this = $(this); // `this` refers to the current form element
-	    var data = JSON.stringify($(this).serializeFormJSON());
-	    console.log(data);
-	    $.post(
-	        $this.attr("action"), // Gets the URL to sent the post to
-	        $this.serialize(), // Serializes form data in standard format
-	        function(data) { 
-	        	console.log("success");
-	        	url = "http://localhost/welcome";
-      			$(location).attr("href", url)
- 			},
-	        "json" // The format the response should be in
-	    );
-	});
 
 });

@@ -19,16 +19,14 @@ html(lang='en')
     // script(src="js/bootstrap.min.js")
   body(data-spy='scroll', data-target='.scrollspy').user.navigation.is-light.is-en_US
     include /profile-header
+    - var foo = user.last_name + ' ' + user.username
     main.user-header
       .header-background
       .container
         .row
           .col-md-6
-            .header-box
-              .header-avatar
-                img(src='/img/blank_profile_picture.png', width='150', height='150')
-              h1
-                span SAILLY Nicolas
+            h1
+              span= foo
     main.user-navigation
       .container
         .row
@@ -42,7 +40,7 @@ html(lang='en')
       form.form-horizontal(action='/update', method='POST', data-toggle="validator")
         .tab-content
           #home.tab-pane.fade.in.active
-            .container(style='width:80%;margin:auto;')
+            .container(style='width:60%;margin:auto;')
               br
               #contact_form
                 .row
@@ -113,7 +111,7 @@ html(lang='en')
                       br
                       input(type='submit', value='Submit').btn.btn-md.btn-primary
           #menu1.tab-pane.fade
-            .container(style='width:80%;margin:auto;')
+            .container(style='width:60%;margin:auto;')
               #hobbies_form
                 .row
                   .col-md-12
@@ -142,7 +140,7 @@ html(lang='en')
                       br
                       input(type='submit', value='Submit').btn.btn-md.btn-primary
           #menu2.tab-pane.fade
-            .container(style='width:80%;margin:auto;')
+            .container(style='width:60%;margin:auto;')
               br
               #skills_form
                 #items
